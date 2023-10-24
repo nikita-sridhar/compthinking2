@@ -1,0 +1,61 @@
+## Functions!
+
+Making a function! Note: parameters exist within functions and are hypothetical. Parameters take on the value of the argument when specified.
+
+```{r}
+
+first_last_chr <- function(s) { 
+  first_chr <- substr(s, 1, 1) 
+  last_chr <- substr(s, nchar(s), nchar(s)) 
+  result <- paste(first_chr, last_chr, sep = "") 
+  return(result) 
+
+}
+
+text <- "Amazing!" #defining text first_last_chr(text) #calling function. NOTE: "s" is the parameter of our function which exists hypothetically. "text" is our argument.
+first_last_chr(text)
+
+#hypothetical: if we want output "My" - an input could be Magicy
+first_last_chr("Magicy") 
+```
+
+## Functions with multiple parameters
+
+```{r}
+
+mean <- function(x) {
+  result <- sum(x) / length(x)
+  return(result)
+}
+
+mean(c(1,2,NA)) #this produces an output of NA, because NA divided by things is NA
+
+
+# Adding a new parameter: na.rm
+mean <- function(x, na.rm) {
+  if (na.rm) { #if na is true, 
+   x <- x[!is.na(x)] #remove this value - doing this by subseting portion of x that is not na
+  }
+  result <- sum(x) / length(x)  #now can find result having removed na
+  return(result)
+}
+
+mean(c(1, 5, 9), na.rm = TRUE)
+mean(c(1, 5, 9), na.rm = FALSE)
+mean(c(1, NA, 5, 9), na.rm = TRUE)
+mean(c(1, NA, 5, 9), na.rm = FALSE)
+```
+
+*For indexing (side note) - whatever goes into square brackets is related to the position of the vector. What comes out as output is the value related to whatever place you're indexing. You can index by position, logic, or name.*
+
+## Functions with optional parameters
+
+```{r}
+repeat_chr <- function(s, n, separator = "_") {
+  repeated <- rep(s, n)
+  result <- paste(repeated, collapse = separator)
+  return(result)
+}
+
+repeat_chr("A", 3, separator = ":")
+```
